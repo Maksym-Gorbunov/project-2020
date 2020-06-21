@@ -3,7 +3,7 @@
 @author: Maksym Gorbunov
 
 #backend-001
-* Java 8, Maven
+* Java, SpringBoot2
 * MySql, JPA
 //* Rest API, RestTemplate
 //* Lombok, ModelMapper 
