@@ -6,7 +6,6 @@ import com.mg.backend001.model.PersonModel;
 import com.mg.backend001.repo.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +13,29 @@ import java.util.List;
 public class PersonService {
 
     @Autowired
-    private PersonRepo personRepo;
+    private PersonRepo repository;
     @Autowired
     private Mapper mapper;
 
 
-    public PersonModel getPersonByPersonalNumber(String personal_number) {
-        //Person person = repository.getOne(personal_number);
-        //return mapper.toModel(code);
-        return null;
+    public PersonModel getPersonById(Long id) {
+        Person person = repository.getOne(id);
+        if (person==null){
+            System.out.println("error in getPersonById()");
+        }
+        return mapper.toModel(person);
+    }
+
+    public PersonModel getPersonByPersonalNumber(String personalNumber) {
+        Person person = repository.findByPersonalNumber(personalNumber);
+        if (person==null){
+            System.out.println("error in getPersonById()");
+        }
+        return mapper.toModel(person);
     }
 
     public Iterable<PersonModel> getAllPersons() {
-        List<Person> personList = personRepo.findAll();
+        List<Person> personList = repository.findAll();
         if (personList == null) {
             System.out.println("error in getAllPersons()");
             //throw new ResourceNotFoundException("resource 'code' not found");
@@ -39,7 +48,7 @@ public class PersonService {
 
     public PersonModel createPerson(PersonModel personModel) {
         Person person = mapper.toEntity(personModel);
-        Person savedPerson = personRepo.save(person);
+        Person savedPerson = repository.save(person);
         if (savedPerson == null) {
             System.out.println("error in createPerson()");
             //throw new ResourceCreationException("unable to save 'code'");
@@ -51,7 +60,7 @@ public class PersonService {
         return null;
     }
 
-    public String deletePerson(String personal_number) {
+    public String deletePerson(String personalNumber) {
         return null;
     }
 }

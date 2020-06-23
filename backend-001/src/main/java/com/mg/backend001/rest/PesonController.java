@@ -16,9 +16,14 @@ public class PesonController {
     @Autowired
     private PersonService service;
 
-    @GetMapping("/{personal_number}")
-    public ResponseEntity<PersonModel> getPersonByPersonalNumber (@PathVariable String personal_number) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(service.getPersonByPersonalNumber(personal_number));
+    @GetMapping("/id/{id}")
+    public ResponseEntity<PersonModel> getPersonById (@PathVariable Long id) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getPersonById(id));
+    }
+
+    @GetMapping("/pn/{personalNumber}")
+    public ResponseEntity<PersonModel> getPersonByPersonalNumber (@PathVariable String personalNumber) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getPersonByPersonalNumber(personalNumber));
     }
 
     @GetMapping("/*")
@@ -37,9 +42,9 @@ public class PesonController {
         return ResponseEntity.status(HttpStatus.OK).body(service.updatePerson(personModel));
     }
 
-    @DeleteMapping("/{personal_number}")
-    public ResponseEntity<String> deletePerson(@PathVariable String personal_number) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(service.deletePerson(personal_number));
+    @DeleteMapping("/{personalNumber}")
+    public ResponseEntity<String> deletePerson(@PathVariable String personalNumber) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.deletePerson(personalNumber));
     }
 
 }
