@@ -16,19 +16,30 @@ public class PesonController {
     @Autowired
     private PersonService service;
 
+    @GetMapping("/*")
+    public ResponseEntity<Iterable<PersonModel>> getAllPersons() throws Exception {
+        Iterable<PersonModel> result = service.getAllPersons();
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
     @GetMapping("/id/{id}")
     public ResponseEntity<PersonModel> getPersonById (@PathVariable Long id) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(service.getPersonById(id));
     }
 
-    @GetMapping("/pn/{personalNumber}")
+    @GetMapping("/personalnumber/{personalNumber}")
     public ResponseEntity<PersonModel> getPersonByPersonalNumber (@PathVariable String personalNumber) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(service.getPersonByPersonalNumber(personalNumber));
     }
 
-    @GetMapping("/*")
-    public ResponseEntity<Iterable<PersonModel>> getAllPersons() throws Exception {
-        Iterable<PersonModel> result = service.getAllPersons();
+    @GetMapping("/email/{email}")
+    public ResponseEntity<PersonModel> getPersonByEmail (@PathVariable String email) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getPersonByEmail(email));
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Iterable<PersonModel>> getPersonsByName (@PathVariable String name) throws Exception {
+        Iterable<PersonModel> result = service.getPersonsByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

@@ -35,6 +35,37 @@ public class PersonService {
         return mapper.toModel(person);
     }
 
+    public Iterable<PersonModel> getPersonsByName(String name) throws ResourceNotFoundException {
+        List<Person> personsByFirstName = repository.findByFirstName(name);
+        List<Person> personsByLastName = repository.findByLastName(name);
+        if ((personsByFirstName==null && personsByLastName==null)
+        || (personsByFirstName.isEmpty() && personsByLastName.isEmpty())){
+            throw new ResourceNotFoundException("no persons found");
+        }
+        if(personsByFirstName==null || personsByFirstName.isEmpty()){
+            return mapper.toModels(personsByLastName);
+        }
+        if(personsByLastName==null || personsByLastName.isEmpty()){
+            return mapper.toModels(personsByFirstName);
+        }
+        List<Person> persons = new ArrayList<>();
+        persons.addAll(personsByFirstName);
+        for(Person person : personsByLastName){
+            if(!persons.contains(person)){
+                persons.add(person);
+            }
+        }
+        return mapper.toModels(persons);
+    }
+
+    public PersonModel getPersonByEmail(String email) throws ResourceNotFoundException {
+        Person person = repository.findByEmail(email);
+        if (person==null){
+            throw new ResourceNotFoundException("person not found");
+        }
+        return mapper.toModel(person);
+    }
+
     public Iterable<PersonModel> getAllPersons() {
         List<Person> personList = repository.findAll();
         if (personList == null) {
