@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -20,19 +21,28 @@ public class PersonService {
 
 
     public PersonModel getPersonById(Long id) throws ResourceNotFoundException {
-        Person person = repository.getOne(id);
-        if (person==null){
-            throw new ResourceNotFoundException("person not found");
+        Optional<Person> person = repository.findById(id);
+        if (person.isEmpty()){
+            throw new ResourceNotFoundException("person with id '"+id+"' not found");
         }
-        return mapper.toModel(person);
+        return mapper.toModel(person.get());
     }
 
     public PersonModel getPersonByPersonalNumber(String personalNumber) throws ResourceNotFoundException {
-        Person person = repository.findByPersonalNumber(personalNumber);
-        if (person==null){
-            throw new ResourceNotFoundException("person not found");
+        Optional<Person> person = repository.findByPersonalNumber(personalNumber);
+        if (person.isEmpty()){
+            throw new ResourceNotFoundException("person with personal number '"+personalNumber+"' not found");
         }
-        return mapper.toModel(person);
+        return mapper.toModel(person.get());
+    }
+
+
+    public PersonModel getPersonByEmail(String email) throws ResourceNotFoundException {
+        Optional<Person> person = repository.findByEmail(email);
+        if (person.isEmpty()){
+            throw new ResourceNotFoundException("person with email '"+email+"' not found");
+        }
+        return mapper.toModel(person.get());
     }
 
     public Iterable<PersonModel> getPersonsByName(String name) throws ResourceNotFoundException {
@@ -40,7 +50,7 @@ public class PersonService {
         List<Person> personsByLastName = repository.findByLastName(name);
         if ((personsByFirstName==null && personsByLastName==null)
         || (personsByFirstName.isEmpty() && personsByLastName.isEmpty())){
-            throw new ResourceNotFoundException("no persons found");
+            throw new ResourceNotFoundException("persons with name '"+name+"' found");
         }
         if(personsByFirstName==null || personsByFirstName.isEmpty()){
             return mapper.toModels(personsByLastName);
@@ -56,14 +66,6 @@ public class PersonService {
             }
         }
         return mapper.toModels(persons);
-    }
-
-    public PersonModel getPersonByEmail(String email) throws ResourceNotFoundException {
-        Person person = repository.findByEmail(email);
-        if (person==null){
-            throw new ResourceNotFoundException("person not found");
-        }
-        return mapper.toModel(person);
     }
 
     public Iterable<PersonModel> getAllPersons() {
@@ -92,7 +94,17 @@ public class PersonService {
         return null;
     }
 
-    public String deletePerson(String personalNumber) {
-        return null;
+    public String deletePersonById(Long id) throws ResourceNotFoundException {
+        getPersonById(id);
+        repository.deleteById(id);
+        return "Country with id '" + id + "' was successfully deleted";
+    }
+
+    public String deletePersonByPersonalNumber(String personalNumber) throws ResourceNotFoundException {
+        getPersonByPersonalNumber(personalNumber);
+        //repository.removeByPersonalNumber(personalNumber);
+        System.out.println("111");
+        repository.deleteByPersonalNumber(personalNumber);
+        return "Country with id '" + personalNumber + "' was successfully deleted";
     }
 }

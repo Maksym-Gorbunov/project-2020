@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/person")
-public class PesonController {
+public class PersonController {
 
     @Autowired
     private PersonService service;
@@ -53,9 +53,14 @@ public class PesonController {
         return ResponseEntity.status(HttpStatus.OK).body(service.updatePerson(personModel));
     }
 
-    @DeleteMapping("/{personalNumber}")
-    public ResponseEntity<String> deletePerson(@PathVariable String personalNumber) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(service.deletePerson(personalNumber));
+    @DeleteMapping("/id/{id}")
+    public ResponseEntity<String> deletePersonById(@PathVariable Long id) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.deletePersonById(id));
+    }
+
+    @DeleteMapping("/personalnumber/{personalNumber}")
+    public ResponseEntity<String> deletePersonByPersonalNumber(@PathVariable String personalNumber) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(service.deletePersonByPersonalNumber(personalNumber));
     }
 
 }
