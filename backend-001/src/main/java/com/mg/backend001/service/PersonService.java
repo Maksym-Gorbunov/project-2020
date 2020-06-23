@@ -1,6 +1,7 @@
 package com.mg.backend001.service;
 
 import com.mg.backend001.config.Mapper;
+import com.mg.backend001.config.exception.exc.ResourceNotFoundException;
 import com.mg.backend001.entity.Person;
 import com.mg.backend001.model.PersonModel;
 import com.mg.backend001.repo.PersonRepo;
@@ -18,18 +19,18 @@ public class PersonService {
     private Mapper mapper;
 
 
-    public PersonModel getPersonById(Long id) {
+    public PersonModel getPersonById(Long id) throws ResourceNotFoundException {
         Person person = repository.getOne(id);
         if (person==null){
-            System.out.println("error in getPersonById()");
+            throw new ResourceNotFoundException("person not found");
         }
         return mapper.toModel(person);
     }
 
-    public PersonModel getPersonByPersonalNumber(String personalNumber) {
+    public PersonModel getPersonByPersonalNumber(String personalNumber) throws ResourceNotFoundException {
         Person person = repository.findByPersonalNumber(personalNumber);
         if (person==null){
-            System.out.println("error in getPersonById()");
+            throw new ResourceNotFoundException("person not found");
         }
         return mapper.toModel(person);
     }
