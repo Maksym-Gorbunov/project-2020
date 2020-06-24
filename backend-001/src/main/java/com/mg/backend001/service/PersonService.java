@@ -103,6 +103,7 @@ public class PersonService {
     public String deletePersonByPersonalNumber(String personalNumber) throws ResourceNotFoundException {
         getPersonByPersonalNumber(personalNumber);
         //repository.removeByPersonalNumber(personalNumber);
+        //repository.removeByPersonalNumber(personalNumber);
         System.out.println("111");
         repository.deleteByPersonalNumber(personalNumber);
         return "Country with id '" + personalNumber + "' was successfully deleted";
