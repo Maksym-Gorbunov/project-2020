@@ -6,7 +6,7 @@
 * Java, SpringBoot2
 * MySql, JPA
 //* Rest API, RestTemplate
-//* Lombok, ModelMapper 
+* Lombok, ModelMapper 
 
 //* VueJs
 //* VueX, cors, moduls, router, axios 
