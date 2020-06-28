@@ -5,8 +5,9 @@
 #backend-001
 * Java, SpringBoot2
 * MySql, JPA
-//* Rest API, RestTemplate
+* Rest API, RestTemplate
 * Lombok, ModelMapper 
+
 
 //* VueJs
 //* VueX, cors, moduls, router, axios 
