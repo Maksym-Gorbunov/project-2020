@@ -9,7 +9,7 @@
 * Lombok, ModelMapper 
 
 
-//* VueJs
+* VueJs
 //* VueX, cors, moduls, router, axios 
 //* Js, Html. Css
 
