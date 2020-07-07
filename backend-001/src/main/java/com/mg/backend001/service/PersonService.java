@@ -90,8 +90,21 @@ public class PersonService {
         return mapper.toModel(savedPerson);
     }
 
-    public PersonModel updatePerson(PersonModel personModel) {
-        return null;
+    public PersonModel updatePerson(PersonModel personModel) throws Exception {
+        Optional<Person> person = repository.findByPersonalNumber(personModel.getPersonalNumber());
+        if (person.isEmpty()){
+            throw new ResourceNotFoundException("person with personal number '"+personModel.getPersonalNumber()+"' not found");
+        }
+        Person personToSave = person.get();
+        personToSave.setEmail(personModel.getEmail());
+        personToSave.setFirstName(personModel.getFirstName());
+        personToSave.setLastName(personModel.getLastName());
+        personToSave.setPersonalNumber(personModel.getPersonalNumber());
+        personToSave.setPhoneNumber(personModel.getPhoneNumber());
+        repository.save(personToSave);
+
+
+        return mapper.toModel(personToSave);
     }
 
     public String deletePersonById(Long id) throws ResourceNotFoundException {
