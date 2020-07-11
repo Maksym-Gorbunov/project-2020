@@ -14,7 +14,7 @@
 
 
 * VueJs
-////* VueX, cors, moduls, router, axios 
+//* VueX, cors, moduls, router, axios 
 * Js, Html. Css
 
 //Total endpoints: 45
