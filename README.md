@@ -17,7 +17,7 @@
 * VueX, cors, moduls, router, axios 
 * Js, Html. Css
 
-//Total endpoints: 45
+Total endpoints: 45
 
 # Result	
 ![](img/1.png
