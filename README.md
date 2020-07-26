@@ -3,7 +3,7 @@
 @author: Maksym Gorbunov
 
 #backend-001
-* Java, SpringBoot2
+uuuu* Java, SpringBoot2
 * MySql, JPA
 * Rest API, RestTemplate
 
