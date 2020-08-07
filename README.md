@@ -4,7 +4,7 @@
 
 #backend-001
 * Java, SpringBoot2
-//* MySql, JPA
+* MySql, JPA
 //* Rest API, RestTemplate
 * Lombok, ModelMapper 
 
