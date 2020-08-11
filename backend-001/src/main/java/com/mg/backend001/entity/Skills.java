@@ -4,5 +4,5 @@ public class Skills {
     String field1;
     String field2;
     String field3;
-    int field3;
+    int field4;
 }

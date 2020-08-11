@@ -16,4 +16,10 @@ public class DefaultController {
     public String healthChecker(){
         return env.getProperty("spring.application.name")+" project is running";
     }
+
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello";
+    }
+
 }
