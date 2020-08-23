@@ -13,12 +13,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vehicle {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(unique = true)
-    private String registerNumber;
+    private String regnumber;
 
     private String model;
     private String color;
+
+    @OneToOne(mappedBy = "vehicle")
+    private Person person;
+
 }

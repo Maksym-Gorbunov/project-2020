@@ -25,4 +25,7 @@ public class Person {
     private String lastName;
     private String phoneNumber;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
+    private Vehicle vehicle;
 }
