@@ -24,6 +24,7 @@ public class Vehicle {
     private String model;
     private String color;
 
+    //split to parent car, motocycle...
     @OneToOne(mappedBy = "vehicle")
     private Person person;
 
