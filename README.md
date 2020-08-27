@@ -7,7 +7,6 @@
 * MySql, JPA
 * Rest API, RestTemplate
 * Lombok, ModelMapper 
-
 * VueJs
 * VueX, cors, moduls, router, axios 
 * Js, Html. Css
